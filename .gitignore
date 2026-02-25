@@ -1,0 +1,30 @@
+# Gradle-spezifische Dateien
+.gradle/
+build/
+
+# Lokale Konfiguration (enthält deinen lokalen SDK-Pfad)
+local.properties
+
+# Kotlin-spezifische temporäre Dateien
+.kotlin/
+
+# Android Studio / IntelliJ Dateien
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+*.iml
+
+# Ausgaben und Logfiles
+*.log
+captures/
+
+# macOS / Windows Systemdateien
+.DS_Store
+Thumbs.db
+
+# Keystore Dateien (Sicherheit: niemals Passwörter/Keys hochladen!)
+*.jks
+*.keystore
