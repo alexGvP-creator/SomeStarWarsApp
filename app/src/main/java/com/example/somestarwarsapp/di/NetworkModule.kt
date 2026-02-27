@@ -1,7 +1,9 @@
 package com.example.somestarwarsapp.di
 
+import com.example.somestarwarsapp.data.mapper.PeopleDataMapper
 import com.example.somestarwarsapp.data.remote.StarWarsApiService
 import com.example.somestarwarsapp.data.repository.StarWarsApiRepositoryImpl
+import com.example.somestarwarsapp.domain.repository.StarWarsApiRepository
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,17 +18,32 @@ private fun provideStarWarsRetrofit(converterFactory: GsonConverterFactory) = Re
 
 private fun provideGsonConverterFactory() = GsonConverterFactory.create()
 
-private fun providerStarWarsApiService(retrofit: Retrofit) =
+private fun provideStarWarsApiService(retrofit: Retrofit) =
     retrofit.create(StarWarsApiService::class.java)
 
-private fun provideStarWarsApiRepository(starWarsApiService: StarWarsApiService) =
-    StarWarsApiRepositoryImpl(starWarsApiService)
 
+private fun providePeopleDataMapper() = PeopleDataMapper()
+
+private fun provideStarWarsApiRepository(
+    starWarsApiService: StarWarsApiService,
+    peopleDataMapper: PeopleDataMapper
+): StarWarsApiRepository {
+    return StarWarsApiRepositoryImpl(starWarsApiService, peopleDataMapper)
+}
 
 val networkModule = module {
 
-    single { ::provideStarWarsRetrofit }
-    single { ::provideGsonConverterFactory }
-    single { ::providerStarWarsApiService }
-    single { ::provideStarWarsApiRepository }
+
+    single { provideStarWarsRetrofit(get()) }
+    single { provideGsonConverterFactory() }
+    single { provideStarWarsApiService(get()) }
+
+    single { providePeopleDataMapper() }
+
+    single {
+        provideStarWarsApiRepository(
+            get(),
+            get()
+        )
+    }
 }

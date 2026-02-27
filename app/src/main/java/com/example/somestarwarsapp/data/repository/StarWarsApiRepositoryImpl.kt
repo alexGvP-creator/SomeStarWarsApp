@@ -1,14 +1,15 @@
 package com.example.somestarwarsapp.data.repository
 
-import com.example.somestarwarsapp.data.model.PeopleDataResponse
+import com.example.somestarwarsapp.data.mapper.PeopleDataMapper
 import com.example.somestarwarsapp.data.remote.StarWarsApiService
 import com.example.somestarwarsapp.domain.model.ApiResult
-import com.example.somestarwarsapp.domain.model.PeopleData
-import com.example.somestarwarsapp.domain.model.PersonData
 import com.example.somestarwarsapp.domain.repository.StarWarsApiRepository
 import java.io.IOException
 
-class StarWarsApiRepositoryImpl(private val starWarsApiService: StarWarsApiService) :
+class StarWarsApiRepositoryImpl(
+    private val starWarsApiService: StarWarsApiService,
+    private val peopleDataMapper: PeopleDataMapper
+) :
     StarWarsApiRepository {
 
     override suspend fun fetchPeople(page: Int): ApiResult = try {
@@ -16,7 +17,7 @@ class StarWarsApiRepositoryImpl(private val starWarsApiService: StarWarsApiServi
 
         if (response.isSuccessful) {
             val body = response.body() ?: return ApiResult.OtherError(UNKNOWN_ERROR_MESSAGE)
-            ApiResult.Success(body.toPeopleData())
+            ApiResult.Success(peopleDataMapper.mapPeopleData(body))
         } else {
             ApiResult.OtherError(UNKNOWN_ERROR_MESSAGE)
         }
@@ -31,7 +32,7 @@ class StarWarsApiRepositoryImpl(private val starWarsApiService: StarWarsApiServi
 
         if (response.isSuccessful) {
             val body = response.body() ?: return ApiResult.OtherError(UNKNOWN_ERROR_MESSAGE)
-            ApiResult.Success(body.toPersonData())
+            ApiResult.Success(peopleDataMapper.mapPersonData(body))
         } else {
             ApiResult.OtherError(UNKNOWN_ERROR_MESSAGE)
         }
@@ -41,15 +42,6 @@ class StarWarsApiRepositoryImpl(private val starWarsApiService: StarWarsApiServi
         ApiResult.OtherError(e.message ?: UNKNOWN_ERROR_MESSAGE)
     }
 
-
-    private fun PeopleDataResponse.Person.toPersonData(): PersonData {
-        return PersonData(0)
-    }
-
-
-    private fun PeopleDataResponse.toPeopleData(): PeopleData {
-        return PeopleData("")
-    }
 
     companion object {
 
