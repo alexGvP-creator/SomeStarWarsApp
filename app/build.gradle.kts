@@ -49,4 +49,5 @@ dependencies {
     implementation(libs.navigation3.ui)
     implementation(libs.material.icons.extended)
     implementation(libs.retrofit)
+    implementation(libs.gson.converter)
 }

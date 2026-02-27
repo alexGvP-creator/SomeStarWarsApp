@@ -22,7 +22,8 @@ class MainActivity : ComponentActivity(), AndroidScopeComponent {
         setContent {
             SomeStarWarsAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    innerPadding // TODO Implement NavDisplay
+                    innerPadding // TODO Implement NavDisplay and HomeScreen
+
                 }
             }
         }
