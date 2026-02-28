@@ -20,7 +20,7 @@ This app created by Alexander Graefe von Pein showcases data from the [SWAPI](ht
 - Navigation to a detail screen (with animation)
 - Displaying additional data in a bottom sheet
 - Showing loading states
-- Error handling with dedicated error screens
+- Error handling with retry function
 
 ---
 
