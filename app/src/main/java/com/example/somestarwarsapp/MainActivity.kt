@@ -42,28 +42,28 @@ class MainActivity : ComponentActivity(), AndroidScopeComponent {
                         transitionSpec = {
                             slideInHorizontally(
                                 initialOffsetX = { it },
-                                animationSpec = tween(500)
+                                animationSpec = tween(ANIMATION_DURATION_MS)
                             ) togetherWith slideOutHorizontally(
                                 targetOffsetX = { -it },
-                                animationSpec = tween(500)
+                                animationSpec = tween(ANIMATION_DURATION_MS)
                             )
                         },
                         popTransitionSpec = {
                             slideInHorizontally(
                                 initialOffsetX = { -it },
-                                animationSpec = tween(500)
+                                animationSpec = tween(ANIMATION_DURATION_MS)
                             ) togetherWith slideOutHorizontally(
                                 targetOffsetX = { it },
-                                animationSpec = tween(500)
+                                animationSpec = tween(ANIMATION_DURATION_MS)
                             )
                         },
                         predictivePopTransitionSpec = {
                             slideInHorizontally(
                                 initialOffsetX = { -it },
-                                animationSpec = tween(500)
+                                animationSpec = tween(ANIMATION_DURATION_MS)
                             ) togetherWith slideOutHorizontally(
                                 targetOffsetX = { it },
-                                animationSpec = tween(500)
+                                animationSpec = tween(ANIMATION_DURATION_MS)
                             )
                         },
                         entryProvider = getEntryProvider()
@@ -71,6 +71,11 @@ class MainActivity : ComponentActivity(), AndroidScopeComponent {
                 }
             }
         }
+    }
+
+    companion object {
+
+       private const val ANIMATION_DURATION_MS = 500
     }
 }
 

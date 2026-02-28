@@ -24,7 +24,7 @@ class HomeScreenViewModel(
     val uiState: StateFlow<HomeScreenUiState> = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch { // TODO refactor -> here are two viewModelScope launch for api call
+        viewModelScope.launch {
             uiState.map { it.currentPage }
                 .distinctUntilChanged()
                 .collect { page ->
