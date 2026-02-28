@@ -17,7 +17,7 @@ This app created by Alexander Graefe von Pein showcases data from the [SWAPI](ht
 ## App Features
 
 - Displaying people data in a `LazyList`
-- Navigation to a detail screen
+- Navigation to a detail screen (with animation)
 - Displaying additional data in a bottom sheet
 - Showing loading states
 - Error handling with dedicated error screens
