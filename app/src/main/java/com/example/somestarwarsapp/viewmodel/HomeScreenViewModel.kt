@@ -41,12 +41,13 @@ class HomeScreenViewModel(
                 val peopleData = result.data
                 _uiState.update {
                     it.copy(
+                        isError = false,
                         peopleViewData = peopleViewDataMapper.mapPeopleViewData(peopleData),
                         currentPage = page
                     )
                 }
             } else {
-                // TODO display error
+                _uiState.update { it.copy(isError = true) }
             }
             _uiState.update { it.copy(isLoading = false) }
         }
