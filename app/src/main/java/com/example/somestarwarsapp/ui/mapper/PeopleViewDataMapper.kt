@@ -3,28 +3,28 @@ package com.example.somestarwarsapp.ui.mapper
 import com.example.somestarwarsapp.domain.model.PeopleData
 import com.example.somestarwarsapp.ui.model.PeopleViewData
 import com.example.somestarwarsapp.ui.model.PersonViewData
+import com.example.somestarwarsapp.util.orDefault
 
 class PeopleViewDataMapper() {
 
-    fun mapPersonViewData(personData: PeopleData.Person): PersonViewData {
+    private fun mapPersonViewData(personData: PeopleData.Person): PersonViewData {
         return PersonViewData(
             name = personData.name,
-            height = personData.height,
-            mass = personData.mass,
-            hairColor = personData.hairColor,
-            skinColor = personData.skinColor,
-            eyeColor = personData.eyeColor,
-            birthYear = personData.birthYear,
-            gender = personData.gender,
-            homeworld = personData.homeworld,
+            height = personData.height + " cm",
+            mass = personData.mass + " kg",
+            hairColor = personData.hairColor.orDefault("n/a"),
+            skinColor = personData.skinColor.orDefault("n/a"),
+            eyeColor = personData.eyeColor.orDefault("n/a"),
+            birthYear = personData.birthYear.orDefault("n/a"),
+            gender = personData.gender.orDefault("n/a"),
+            homeworld = personData.homeworld.orDefault("n/a"),
             films = personData.films,
             species = personData.species,
             vehicles = personData.vehicles,
             starships = personData.starships,
-            id = personData.id
+            url = personData.url
         )
     }
-
 
     fun mapPeopleViewData(response: PeopleData): PeopleViewData {
         return PeopleViewData(

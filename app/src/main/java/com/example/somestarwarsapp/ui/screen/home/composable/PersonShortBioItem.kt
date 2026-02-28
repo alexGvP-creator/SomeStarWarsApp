@@ -1,5 +1,6 @@
-package com.example.somestarwarsapp.ui.composable
+package com.example.somestarwarsapp.ui.screen.home.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,14 +20,15 @@ import com.example.somestarwarsapp.R
 @Composable
 fun PersonShortBioItem(
     name: String,
-    birthYear: String?,
-    gender: String?,
-    homeworld: String?,
-    films: List<String>,
+    birthYear: String,
+    gender: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
-        modifier = modifier.padding(10.dp),
+        modifier = modifier
+            .padding(10.dp)
+            .clickable(onClick = onClick),
         colors = CardDefaults.elevatedCardColors(
             containerColor = colorResource(R.color.secondary)
         )
@@ -53,7 +55,7 @@ fun PersonShortBioItem(
                 Text(
                     color = colorResource(R.color.white),
                     fontSize = 16.sp,
-                    text = birthYear ?: "Unknown"
+                    text = birthYear
                 )
             }
             Row(
@@ -68,37 +70,8 @@ fun PersonShortBioItem(
                 Text(
                     color = colorResource(R.color.white),
                     fontSize = 16.sp,
-                    text = gender ?: "Unknown"
+                    text = gender
                 )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    color = colorResource(R.color.off_white),
-                    fontSize = 16.sp,
-                    text = "Homeworld: "
-                )
-                Text(
-                    color = colorResource(R.color.white),
-                    fontSize = 16.sp,
-                    text = homeworld ?: "Unknown"
-                )
-            }
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    color = colorResource(R.color.off_white),
-                    fontSize = 16.sp,
-                    text = "Film: "
-                )
-                for (film in films) {
-                    Text(
-                        color = colorResource(R.color.white),
-                        fontSize = 16.sp,
-                        text = film
-                    )
-                }
             }
         }
     }

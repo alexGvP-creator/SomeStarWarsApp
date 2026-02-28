@@ -27,22 +27,6 @@ class StarWarsApiRepositoryImpl(
         ApiResult.OtherError(e.message ?: UNKNOWN_ERROR_MESSAGE)
     }
 
-    override suspend fun fetchPerson(id: Int): ApiResult = try {
-        val response = starWarsApiService.getPerson(id)
-
-        if (response.isSuccessful) {
-            val body = response.body() ?: return ApiResult.OtherError(UNKNOWN_ERROR_MESSAGE)
-            ApiResult.Success(peopleDataMapper.mapPersonData(body))
-        } else {
-            ApiResult.OtherError(UNKNOWN_ERROR_MESSAGE)
-        }
-    } catch (e: IOException) {
-        ApiResult.NetworkError
-    } catch (e: Exception) {
-        ApiResult.OtherError(e.message ?: UNKNOWN_ERROR_MESSAGE)
-    }
-
-
     companion object {
 
         private const val UNKNOWN_ERROR_MESSAGE = "Something went wrong."

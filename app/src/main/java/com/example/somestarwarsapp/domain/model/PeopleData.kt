@@ -21,6 +21,6 @@ data class PeopleData(
         val species: List<String>,
         val vehicles: List<String>,
         val starships: List<String>,
-        val id: Int
+        val url: String
     )
 }

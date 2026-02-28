@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation3.ui.NavDisplay
 import com.example.somestarwarsapp.ui.navigation.Navigator
@@ -29,10 +31,7 @@ class MainActivity : ComponentActivity(), AndroidScopeComponent {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val selectedNavigationIndex = rememberSaveable {
-                mutableIntStateOf(0)
-            }
-            val navigator: Navigator = get()
+            val navigator = get<Navigator>()
 
             SomeStarWarsAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -40,6 +39,33 @@ class MainActivity : ComponentActivity(), AndroidScopeComponent {
                         backStack = navigator.backstack,
                         modifier = Modifier.padding(innerPadding),
                         onBack = { navigator.goBack() },
+                        transitionSpec = {
+                            slideInHorizontally(
+                                initialOffsetX = { it },
+                                animationSpec = tween(500)
+                            ) togetherWith slideOutHorizontally(
+                                targetOffsetX = { -it },
+                                animationSpec = tween(500)
+                            )
+                        },
+                        popTransitionSpec = {
+                            slideInHorizontally(
+                                initialOffsetX = { -it },
+                                animationSpec = tween(500)
+                            ) togetherWith slideOutHorizontally(
+                                targetOffsetX = { it },
+                                animationSpec = tween(500)
+                            )
+                        },
+                        predictivePopTransitionSpec = {
+                            slideInHorizontally(
+                                initialOffsetX = { -it },
+                                animationSpec = tween(500)
+                            ) togetherWith slideOutHorizontally(
+                                targetOffsetX = { it },
+                                animationSpec = tween(500)
+                            )
+                        },
                         entryProvider = getEntryProvider()
                     )
                 }

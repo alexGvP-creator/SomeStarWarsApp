@@ -24,7 +24,7 @@ class HomeScreenViewModel(
     val uiState: StateFlow<HomeScreenUiState> = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch { // TODO refactor -> here are two viewModelScope launch for api call
             uiState.map { it.currentPage }
                 .distinctUntilChanged()
                 .collect { page ->
@@ -33,18 +33,23 @@ class HomeScreenViewModel(
         }
     }
 
-    private suspend fun fetchPeople(page: Int) {
-        _uiState.update { it.copy(isLoading = true) }
-        val result = repository.fetchPeople(page)
-        if (result is ApiResult.Success && result.data is PeopleData) {
-            val peopleData = result.data
-            _uiState.update {
-                it.copy(peopleViewData = peopleViewDataMapper.mapPeopleViewData(peopleData))
+    fun fetchPeople(page: Int) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            val result = repository.fetchPeople(page)
+            if (result is ApiResult.Success && result.data is PeopleData) {
+                val peopleData = result.data
+                _uiState.update {
+                    it.copy(
+                        peopleViewData = peopleViewDataMapper.mapPeopleViewData(peopleData),
+                        currentPage = page
+                    )
+                }
+            } else {
+                // TODO display error
             }
-        } else {
-            // TODO display error
+            _uiState.update { it.copy(isLoading = false) }
         }
-        _uiState.update { it.copy(isLoading = false) }
     }
 }
 

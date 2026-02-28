@@ -20,7 +20,7 @@ material-icons-extended = { module = "androidx.compose.material:material-icons-e
 navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3Runtime" }
 navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3Ui" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+kotlinx-serialization-converter = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
