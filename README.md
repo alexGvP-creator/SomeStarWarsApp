@@ -24,9 +24,11 @@ This app created by Alexander Graefe von Pein showcases data from the [SWAPI](ht
 
 ---
 
-## Missing Features
+## Missing Features because I ran out of time
 
 - NavigationViewModel to persist navigation state (state gets currently lost in onDestroy)
+- Tests
+- Composable Previews
 - Fetching and displaying film, planet, and spaceship data
 - Caching data in a local database
 
