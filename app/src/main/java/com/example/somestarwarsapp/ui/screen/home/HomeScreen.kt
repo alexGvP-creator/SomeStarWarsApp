@@ -78,8 +78,8 @@ fun HomeScreen(
                     isLoading = uiState.isLoading,
                     isNext = isNext,
                     isPrevious = isPrevious,
-                    onPreviousClick = { viewModel.fetchPeople(currentPage - 1) },
-                    onNextClick = { viewModel.fetchPeople(currentPage + 1) }
+                    onPreviousClick = { viewModel.setPageNumber(currentPage - 1) },
+                    onNextClick = { viewModel.setPageNumber(currentPage + 1) }
                 )
             }
 

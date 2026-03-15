@@ -33,23 +33,29 @@ class HomeScreenViewModel(
         }
     }
 
-    fun fetchPeople(page: Int) {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
-            val result = repository.fetchPeople(page)
-            if (result is ApiResult.Success && result.data is PeopleData) {
-                val peopleData = result.data
-                _uiState.update {
-                    it.copy(
-                        isError = false,
-                        peopleViewData = peopleViewDataMapper.mapPeopleViewData(peopleData),
-                        currentPage = page
-                    )
-                }
-            } else {
-                _uiState.update { it.copy(isError = true) }
+    private suspend fun fetchPeople(page: Int) {
+        _uiState.update { it.copy(isLoading = true) }
+        val result = repository.fetchPeople(page)
+        if (result is ApiResult.Success && result.data is PeopleData) {
+            val peopleData = result.data
+            _uiState.update {
+                it.copy(
+                    isError = false,
+                    peopleViewData = peopleViewDataMapper.mapPeopleViewData(peopleData),
+                    currentPage = page
+                )
             }
-            _uiState.update { it.copy(isLoading = false) }
+        } else {
+            _uiState.update { it.copy(isError = true) }
+        }
+        _uiState.update { it.copy(isLoading = false) }
+    }
+
+    fun setPageNumber(pageNumber: Int) {
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(currentPage = pageNumber)
+            }
         }
     }
 }
