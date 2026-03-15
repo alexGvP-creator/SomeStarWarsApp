@@ -51,6 +51,12 @@ class HomeScreenViewModel(
         _uiState.update { it.copy(isLoading = false) }
     }
 
+    fun refetchData() {
+        viewModelScope.launch {
+            fetchPeople(uiState.value.currentPage)
+        }
+    }
+
     fun setPageNumber(pageNumber: Int) {
         viewModelScope.launch {
             _uiState.update {
