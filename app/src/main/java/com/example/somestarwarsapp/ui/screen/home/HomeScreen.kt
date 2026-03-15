@@ -18,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.somestarwarsapp.R
 import com.example.somestarwarsapp.ui.model.PersonViewData
 import com.example.somestarwarsapp.ui.screen.home.composable.LoadingItem
@@ -32,7 +33,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
 
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.isError) {
         Column(
             modifier = modifier
@@ -51,7 +52,7 @@ fun HomeScreen(
                     containerColor = colorResource(R.color.secondary),
                     contentColor = colorResource(R.color.secondary)
                 ),
-                onClick = { viewModel.fetchPeople(uiState.currentPage) }
+                onClick = { viewModel.refetchData() }
             ) {
                 Text(
                     "Try Again",
