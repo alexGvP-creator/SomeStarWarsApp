@@ -8,6 +8,8 @@ navigation3Runtime = "1.0.1"
 material3 = "1.4.0" #is already the latest stable version
 navigation3Ui = "1.0.1"
 retrofit = "3.0.0"
+uiToolingPreview = "1.10.5"
+uiTooling = "1.10.5"
 
 [libraries]
 
@@ -21,6 +23,8 @@ navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runt
 navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3Ui" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 kotlinx-serialization-converter = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "uiToolingPreview" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

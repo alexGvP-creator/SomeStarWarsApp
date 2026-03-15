@@ -50,4 +50,6 @@ dependencies {
     implementation(libs.material.icons.extended)
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.converter)
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
 }
