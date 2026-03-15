@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.somestarwarsapp.R
@@ -44,9 +45,10 @@ fun PageNavigation(
             onClick = { onPreviousClick() }
         ) {
             Text(
-                "Previous Page",
+                text = "Previous Page",
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
+                overflow = TextOverflow.Ellipsis,
                 color = colorResource(if (isPrevious) R.color.accent else R.color.secondary)
             )
         }
@@ -60,9 +62,10 @@ fun PageNavigation(
             onClick = { onNextClick() }
         ) {
             Text(
-                "Next Page",
+                text = "Next Page",
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
+                overflow = TextOverflow.Ellipsis,
                 color = colorResource(if (isNext) R.color.accent else R.color.secondary)
             )
         }
